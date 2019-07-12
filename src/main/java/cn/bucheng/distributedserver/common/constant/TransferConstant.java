@@ -21,6 +21,7 @@ public class TransferConstant {
     public static final int FIN = 4;
     //充当分布式事务中的协调器实例
     public final static String LEADER_NAME = "leader";
+    public final static String INSTANCE_NAME = "instance";
     //默认为3分钟
     public final static int DEFAULT_TX_EXECUTE_TIMEOUT = 180;
     //默认启动的端口步长
