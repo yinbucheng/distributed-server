@@ -48,7 +48,7 @@ public class ZookeeperServiceRegistry implements ServiceRegistry {
     @Override
     public void deregister(ServiceInstance instance) {
         try {
-            client.delete().guaranteed().deletingChildrenIfNeeded().forPath(instance.getServiceId() + "/" + TransferConstant.LEADER_NAME + "/" + instance.getHost() + ":" + instance.getPort());
+            client.delete().guaranteed().deletingChildrenIfNeeded().forPath(instance.getServiceId() + "/" + TransferConstant.LEADER_NAME );
         } catch (Exception e) {
             logger.error(e.toString());
             throw new RuntimeException(e);
