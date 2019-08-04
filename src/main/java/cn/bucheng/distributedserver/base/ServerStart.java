@@ -39,11 +39,12 @@ public class ServerStart implements CommandLineRunner {
     @Value("${mst.server.host}")
     private String host;
 
-    private  Integer serverPort;
+    private Integer serverPort;
 
     @Override
     public void run(String... args) throws Exception {
         startServer();
+        startRegistry();
     }
 
     //端口是先从配置文件中获取，如果获取失败再将server.port的端口加上指定大小启动
@@ -67,4 +68,24 @@ public class ServerStart implements CommandLineRunner {
         thread.start();
     }
 
+    public void startRegistry() {
+        Thread thread = new Thread(() -> {
+            while (true) {
+                ServiceInstance instance = new DefaultServiceInstance(serviceId, host, serverPort, TransferConstant.EPHEMERAL);
+                boolean flag = registry.register(instance);
+                if (flag) {
+                    logger.info("become leader to manager transaction");
+                }
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.setDaemon(true);
+        thread.setName("register_thread");
+        thread.start();
+
+    }
 }

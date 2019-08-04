@@ -34,6 +34,7 @@ public class MonitorController {
     public Object index() {
         try {
             Map<String, Object> result = new LinkedHashMap<>();
+            result.put("version",TransferConstant.VERSION);
             byte[] bytes = client.getData().forPath("/" + serviceId + "/" + TransferConstant.LEADER_NAME);
             if (null != bytes) {
                 result.put("leader", new String(bytes));

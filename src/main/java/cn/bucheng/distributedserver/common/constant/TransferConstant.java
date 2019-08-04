@@ -28,4 +28,6 @@ public class TransferConstant {
     public static int STEP_PORT = 33;
     public static final int EPHEMERAL = 0;
     public static final int PERSISTENT = 1;
+
+    public static final String VERSION = "v1.0.0";
 }

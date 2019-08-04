@@ -63,7 +63,6 @@ public class NetServer {
             ChannelFuture future = bootstrap.bind(port).sync();
             future.addListener((param) -> {
                 if (param.isSuccess()) {
-                    startRegistry(port);
                     logger.info("start server success in port " + port);
                 } else {
                     logger.error("start server fail in port " + port);
@@ -80,13 +79,13 @@ public class NetServer {
     }
 
 
-    public void startRegistry(int serverPort) {
-        ServiceInstance instance = new DefaultServiceInstance(serviceId, host, serverPort, TransferConstant.EPHEMERAL);
-        boolean flag = registry.register(instance);
-        if (flag) {
-            logger.info("become leader to manager transaction");
-        }
-    }
+//    public void startRegistry(int serverPort) {
+//        ServiceInstance instance = new DefaultServiceInstance(serviceId, host, serverPort, TransferConstant.EPHEMERAL);
+//        boolean flag = registry.register(instance);
+//        if (flag) {
+//            logger.info("become leader to manager transaction");
+//        }
+//    }
 
     public void cancelRegistry(int serverPort){
         ServiceInstance instance = new DefaultServiceInstance(serviceId, host, serverPort, TransferConstant.EPHEMERAL);
